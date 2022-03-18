@@ -1,1 +1,4 @@
 /* Header Component CSS */
+ul li a {
+  cursor: pointer;
+}
