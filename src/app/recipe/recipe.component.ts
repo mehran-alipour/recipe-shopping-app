@@ -11,7 +11,6 @@ export class RecipeComponent implements OnInit {
   constructor(private dS: DataStorageService) { }
 
   ngOnInit(): void {
-    console.log("ngOnInit ---- Recipes Component");
     if (this.dS.firstLoad) {
       console.log("Recipes is being loaded");
       this.dS.fetchRecipes().subscribe();

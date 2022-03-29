@@ -19,8 +19,10 @@ export class DataStorageService implements OnInit{
 
   storeRecipes() {
     const recipes = this.recipeService.getRecipes();
-    this.http.put('https://ng-course-recipe-book-abcd2-default-rtdb.firebaseio.com/recipes.json', recipes).subscribe(res=>
-    console.log(res))
+    this.http.put(
+      'https://ng-course-recipe-book-abcd2-default-rtdb.firebaseio.com/recipes.json', 
+      recipes
+    ).subscribe();
   }
 
   fetchRecipes(){
