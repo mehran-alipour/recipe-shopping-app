@@ -15,7 +15,7 @@ import * as AuthActions from './store/auth.actions';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnDestroy {
+export class AuthComponent implements OnDestroy, OnInit {
   isLoginMode = true;
   isLoading = false;
   error: string = null;
@@ -29,6 +29,13 @@ export class AuthComponent implements OnDestroy {
     private componentFactoryResolver: ComponentFactoryResolver,
     private store: Store<fromApp.AppState>
   ) { }
+
+  ngOnInit(): void {
+    this.store.select('auth').subscribe(authState => {
+      this.isLoading = authState.isLoading;
+      this.error = authState.authError;
+    })
+  }
 
   onHandleError(){
     this.error = null;
@@ -55,18 +62,18 @@ export class AuthComponent implements OnDestroy {
       authObs = this.authService.signup(email, password);
     }
 
-    authObs.subscribe({
-      next: res => {
-        this.isLoading = false;
-        this.error = null;
-        this.router.navigate(['/recipes']);
-      },
-      error: error => {
-        this.error = error
-        this.showErrorAlert(error);
-        this.isLoading = false;
-      }
-    })
+    // authObs.subscribe({
+    //   next: res => {
+    //     this.isLoading = false;
+    //     this.error = null;
+    //     this.router.navigate(['/recipes']);
+    //   },
+    //   error: error => {
+    //     this.error = error
+    //     this.showErrorAlert(error);
+    //     this.isLoading = false;
+    //   }
+    // })
 
     form.reset();
 
