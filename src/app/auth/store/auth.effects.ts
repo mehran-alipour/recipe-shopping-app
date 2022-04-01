@@ -27,7 +27,8 @@ const handelAuth = (expiresIn: number, email: string, userId: string, token:stri
     email: email, 
     userId: userId, 
     token: token, 
-    expirationDate: exDate})
+    expirationDate: exDate,
+    redirect: true})
 };
 
 const handelError = (errorRes: any) => {
@@ -141,7 +142,8 @@ export class AuthEffects {
               email: loadedUser.email, 
               userId: loadedUser.id, 
               token: loadedUser.token, 
-              expirationDate: expDateToken
+              expirationDate: expDateToken,
+              redirect: false
             }
           )
           // )
@@ -157,7 +159,11 @@ export class AuthEffects {
   authRedirect$ = createEffect(() => 
     this.actions$.pipe(
       ofType(AuthActions.AUTH_SUCCESS),
-      tap(() => this.router.navigate(['/']))
+      tap((authSuccessActions:AuthActions.AuthSuccess) => {
+        if(authSuccessActions.payload.redirect){
+          this.router.navigate(['/'])
+        }
+      })
     ),
     {dispatch: false}
   )
