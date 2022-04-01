@@ -1,15 +1,19 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, OnInit } from "@angular/core";
 import { map, tap } from "rxjs";
-import { Recipe } from "../recipe/recipe.model";
+import { Store } from '@ngrx/store';
 
+import { Recipe } from "../recipe/recipe.model";
 import { RecipeService } from "../recipe/recipe.service";
+import * as fromApp from '../store/app.reducer';
+import * as RecipesActions from '../recipe/store/recipe.actions';
 
 @Injectable({providedIn: 'root'})
 export class DataStorageService implements OnInit{
   constructor(
     private http: HttpClient, 
-    private recipeService: RecipeService, 
+    private recipeService: RecipeService,
+    private store: Store<fromApp.AppState> 
   ){}
 
   firstLoad = true;
@@ -38,8 +42,9 @@ export class DataStorageService implements OnInit{
             };
           });
         }),
-        tap(rec => {
-          this.recipeService.setRecipes(rec);
+        tap(recipes => {
+          //this.recipeService.setRecipes(rec);
+          this.store.dispatch(new RecipesActions.SetRecipes(recipes));
         })
       )
       // .subscribe(res=>{

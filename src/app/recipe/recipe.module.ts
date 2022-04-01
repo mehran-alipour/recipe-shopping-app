@@ -1,5 +1,4 @@
 import { NgModule } from "@angular/core";
-import { RouterModule } from "@angular/router";
 import { ReactiveFormsModule } from "@angular/forms";
 
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
