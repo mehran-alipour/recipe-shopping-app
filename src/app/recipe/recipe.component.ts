@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DataStorageService } from '../shared/data-storage.service';
 
 @Component({
   selector: 'app-recipe',
@@ -8,14 +7,14 @@ import { DataStorageService } from '../shared/data-storage.service';
 })
 export class RecipeComponent implements OnInit {
 
-  constructor(private dS: DataStorageService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    if (this.dS.firstLoad) {
-      console.log("Recipes is being loaded");
-      this.dS.fetchRecipes().subscribe();
-      this.dS.firstLoad = false;
-    }
+    // if (this.dS.firstLoad) {
+    //   console.log("Recipes is being loaded");
+    //   this.dS.fetchRecipes().subscribe();
+    //   this.dS.firstLoad = false;
+    // }
   }
 
 }
