@@ -13,7 +13,6 @@
     "build:ssr": "ng build --prod && ng run recipe-shopping-app:server:production",
     "prerender": "ng run recipe-shopping-app:prerender"
   },
-  
   "private": true,
   "dependencies": {
     "@angular/animations": "~13.1.0",
@@ -31,6 +30,7 @@
     "@nguniversal/express-engine": "^13.0.2",
     "bootstrap": "^3.4.1",
     "express": "^4.15.2",
+    "jquery": "^3.6.0",
     "rxjs": "~7.4.0",
     "save": "^2.4.0",
     "tslib": "^2.3.0",
