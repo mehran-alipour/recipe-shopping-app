@@ -1,3 +1,4 @@
+import { animate, group, keyframes, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -9,7 +10,28 @@ import * as formApp from '../store/app.reducer';
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
-  styleUrls: ['./shopping-list.component.css']
+  styleUrls: ['./shopping-list.component.css'],
+  animations:[
+    trigger('list1', [
+      state('in',style({
+        opacity: 1,
+        transform: 'translateX(0)'
+      })),
+      transition('void => *', [
+        style({
+          opacity: 0,
+          transform: 'translateX(-100px)'
+        }),
+        animate(300)
+      ]),
+      transition('* => void',[
+        animate(300,style({
+          opacity: 0,
+          transform: 'translateX(100px)'
+        }))
+      ])
+    ]),
+  ]
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
   ingredients: Observable<{ ingredients: Ingredients[] }>;
@@ -27,6 +49,13 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
   
   ngOnDestroy(): void {
+  }
+  animationStarted(event){
+    console.log(event)
+  }
+  
+  animationended(event){
+    console.log(event)
   }
 
 }
